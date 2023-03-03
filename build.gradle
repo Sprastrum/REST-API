@@ -15,18 +15,24 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
+<<<<<<< HEAD
     implementation 'org.xerial:sqlite-jdbc:3.30.1'
 
+=======
+>>>>>>> 9ccd38f5adf78a1e697c2bf4fd2fcaf325b509ab
     compileOnly 'org.projectlombok:lombok:1.18.26'
     annotationProcessor 'org.projectlombok:lombok:1.18.26'
 
     testCompileOnly 'org.projectlombok:lombok:1.18.26'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+<<<<<<< HEAD
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+=======
+>>>>>>> 9ccd38f5adf78a1e697c2bf4fd2fcaf325b509ab
 }
 
 
