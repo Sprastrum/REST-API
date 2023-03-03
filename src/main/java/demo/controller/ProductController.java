@@ -24,12 +24,6 @@ public class ProductController {
     @GetMapping("/product/update/stock")
     public void searchProduct(@RequestParam int code,
                               @RequestParam int stock) {
-        productDB.update
-       // if (productDB.searchDataBaseByCode(code)){
-
-        //}
-
-
-    }
-
+        productDB.update(code,stock);
+            }
 }
