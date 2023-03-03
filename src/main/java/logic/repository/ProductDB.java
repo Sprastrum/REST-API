@@ -16,4 +16,14 @@ public class ProductDB {
             System.out.println(e.getMessage());
         }
     }
+
+    public void searchDataBaseByCode(int code) {
+        String sql = "SELECT * FROM PRODUCT WHERE CODE = " + code;
+
+        try (Connection connection = Connect.connect(); PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.executeQuery(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
