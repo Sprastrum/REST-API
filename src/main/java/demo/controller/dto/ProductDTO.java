@@ -20,7 +20,7 @@ public class ProductDTO {
                 ", price='" + price + '\'' +
                 ", stock='" + stock + '\'' +
                 ", code=" + code +
-                '}';
+                 '}';
     }
 }
 
