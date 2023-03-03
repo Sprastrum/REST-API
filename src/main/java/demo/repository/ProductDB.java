@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class ProductDB {
     private Connection connect() {
-        String url = "jdbc:sqlite:.database.db";
+        String url = "jdbc:sqlite:database.db";
         Connection connection = null;
 
         try {
@@ -22,6 +22,19 @@ public class ProductDB {
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, name);
             statement.setInt(2, price);
+            statement.setInt(3, stock);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void update(int code, int stock) {
+        String sql = "UPDATE PRODUCT " +
+                "SET STOCK = ? WHERE CODE = " + code;
+
+        try (Connection connection = this.connect();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(3, stock);
             statement.executeUpdate();
         } catch (SQLException e) {
