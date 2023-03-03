@@ -29,7 +29,7 @@ public class ProductDB {
         }
     }
 
-    public void searchDataBaseByCode(int code) {
+    public int searchDataBaseByCode(int code) {
         String sql = "SELECT * FROM PRODUCT WHERE CODE = " + code;
 
         try (Connection connection = this.connect();
@@ -45,5 +45,6 @@ public class ProductDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
     }
 }
