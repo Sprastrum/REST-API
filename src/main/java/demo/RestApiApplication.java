@@ -12,6 +12,5 @@ public class RestApiApplication {
 		Connect.connect();
 		SpringApplication.run(RestApiApplication.class, args);
 		ProductDB productDB = new ProductDB();
-		productDB.insertDataBase("Jabón", 1000, 20);
 	}
 }
