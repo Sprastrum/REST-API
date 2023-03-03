@@ -11,5 +11,6 @@ public class RestApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RestApiApplication.class, args);
 		ProductDB productDB = new ProductDB();
+		productDB.update(560, 1);
 	}
 }

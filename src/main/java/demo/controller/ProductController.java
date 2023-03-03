@@ -24,6 +24,13 @@ public class ProductController {
     @GetMapping("/product/update/stock")
     public void searchProduct(@RequestParam int code,
                               @RequestParam int stock) {
-        productDB.update(code,stock);
+        productDB.update(stock,code);
             }
+    @PostMapping(path = "/product/sale")
+    public String Sale(@RequestParam ArrayList <ProductDTO> products) {
+        for (ProductDTO product : products) {
+                System.out.println(product);
+            }
+        return ("se vendio tanto");
+    }
 }
