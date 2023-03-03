@@ -5,11 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connect {
-    public static void connect() {
+    public static Connection connect() {
         Connection connect = null;
 
         try {
-            String url = "jdbc:sqlite:C:/Users/Santi/Desktop/REST-API/.database.db";
+            String url = "jdbc:sqlite:C://Users//Santi//Desktop//REST-API//.database.db";
 
             connect = DriverManager.getConnection(url);
 
@@ -25,5 +25,6 @@ public class Connect {
                 System.out.println(ex.getMessage());
             }
         }
+        return connect;
     }
 }
