@@ -27,10 +27,10 @@ public class ProductController {
         productDB.update(stock,code);
             }
     @PostMapping(path = "/product/sale")
-    public String Sale(@RequestParam ArrayList <ProductDTO> products) {
-        for (ProductDTO product : products) {
-                System.out.println(product);
-            }
+    public String Sale(@RequestParam  ProductDTO products) {
+        ArrayList<String> names =
+        ArrayList<Integer> stocks = products.getStock();
+        productDB.sellProduct(,)
         return ("se vendio tanto");
     }
 }
