@@ -1,6 +1,5 @@
 package demo.repository;
 
-import java.beans.PropertyEditorSupport;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -31,9 +30,9 @@ public class ProductDB {
         }
     }
 
-    public void update(int stock, int code) {
+    public void update(int code, int stock) {
         String sql = "UPDATE PRODUCT " +
-                "SET STOCK = ? WHERE CODE = ?";
+                "SET STOCK = ? WHERE CODE = " + code;
 
         try (Connection connection = this.connect();
              PreparedStatement statement = connection.prepareStatement(sql)) {
