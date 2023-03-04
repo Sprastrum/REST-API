@@ -45,16 +45,16 @@ public class ProductDB {
         }
     }
 
-    public int searchDataBaseByCode(int code) {
-        String sql = "SELECT * FROM PRODUCT WHERE CODE = " + code;
-        int result = 0;
+    public String searchDataBaseByName(String name) {
+        String sql = "SELECT * FROM PRODUCT WHERE CODE = \"" + name + "\"";
+        String result = "";
 
         try (Connection connection = this.connect();
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
 
             while (rs.next()) {
-                System.out.println(rs.getString("Name") + "\t" +
+                result = (rs.getString("Name") + "\t" +
                         rs.getInt("Price") + "\t" +
                         rs.getInt("Stock") + "\t" +
                         rs.getInt("Code"));
@@ -66,25 +66,65 @@ public class ProductDB {
         return result;
     }
 
-    public Integer sellProduct(ArrayList<String> names, ArrayList<Integer> stocks) {
+    public int actuallyStock(String name) {
+        String sql = "SELECT STOCK FROM PRODUCT WHERE CODE = \"" + name + "\"";
         int result = 0;
 
-        for(String s: names) {
-            String sql = "SELECT PRICE FROM PRODUCT WHERE CODE = " + s;
+        try (Connection connection = this.connect();
+             Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
 
-            try (Connection connection = this.connect();
-                 Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery(sql)) {
-
-                while (rs.next()) {
-                    System.out.println(rs.getString("Name") + "\t" +
-                            rs.getInt("Price") + "\t" +
-                            rs.getInt("Stock") + "\t" +
-                            rs.getInt("Code"));
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
+            while (rs.next()) {
+                result = rs.getInt("Stock");
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return result;
+    }
+
+    public boolean inStocks(String name, int stock) {
+        String sql = "SELECT STOCK FROM PRODUCT WHERE NAME = \"" + name + "\"";
+        boolean result = true;
+
+        try (Connection connection = this.connect();
+             Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            if(stock > rs.getInt("Stock")) {
+                System.out.println("No hay tanta cantidad de " + name + " para vender.");
+                result = false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return result;
+    }
+
+    public Integer sellProduct(ArrayList<String> names, ArrayList<Integer> stocks) {
+        int result = 0;
+        int index = 0;
+
+        for(String s: names) {
+            String sql = "SELECT PRICE, STOCK, CODE FROM PRODUCT WHERE NAME = \"" + s + "\"";
+
+            if(inStocks(s, stocks.get(index))) {
+                try (Connection connection = this.connect();
+                     Statement statement = connection.createStatement();
+                     ResultSet rs = statement.executeQuery(sql)) {
+
+                    while (rs.next()) {
+                        result += rs.getInt("Price") * stocks.get(index);
+
+                        System.out.println(result);
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+
+            index ++;
         }
 
         return result;
